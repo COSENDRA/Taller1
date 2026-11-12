@@ -50,20 +50,21 @@ productos = []
 
 for usuario in data.keys():
     for compra in data[usuario]:
-        producto = {
-            "usuario": usuario,
-            "producto": compra["producto"],
-            "precio": compra["precio"]
-        }
+        productos.append(compra)
 
-        productos.append(producto)
+producto_caro = productos[0]
+producto_barato = productos[0]
 
-producto_caro = max(productos, key=lambda x: x["precio"])
-producto_barato = min(productos, key=lambda x: x["precio"])
+for producto in productos:
 
+    if producto["precio"] > producto_caro["precio"]:
+        producto_caro = producto
 
-print("Mas caro:", producto_caro)
-print("Mas barato:", producto_barato)
+    if producto["precio"] < producto_barato["precio"]:
+        producto_barato = producto
+
+print("Mas caro:", producto_caro["producto"], producto_caro["precio"], "€")
+print("Mas barato:", producto_barato["producto"], producto_barato["precio"], "€")
 
 
 # 5. RESUMEN POR CATEGORIAS
